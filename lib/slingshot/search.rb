@@ -66,7 +66,7 @@ module Slingshot
         @url      = "#{Configuration.url}/#{indices.join(',')}/_search"
         @response = Configuration.client.post(@url, self.to_json)
         @json     = Yajl::Parser.parse(@response)
-        @results  = Results::Collection.new(@json)
+        @results  = Results::Collection.new(@json, @options)
         self
       rescue Exception => e
         STDERR.puts "[REQUEST FAILED]\n#{self.to_curl}\n"
